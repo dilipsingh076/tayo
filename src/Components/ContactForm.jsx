@@ -1,70 +1,70 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { addContact } from '../Redux/actions';
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addContact } from "../Redux/store";
+import ContactList from "./ContactList";
+import { v4 as uuidv4 } from 'uuid';
 
 function ContactForm() {
   const dispatch = useDispatch();
-  const [formData, setFormData] = useState({
-    name: '',
-    phone: '',
-    email: '',
-  });
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
 
-  const handleInputChange = e => {
-    const { name, value } = e.target;
-    setFormData(prevState => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addContact(formData));
-    setFormData({
-      name: '',
-      phone: '',
-      email: '',
-    });
+    const id = uuidv4();
+    const newContact = {
+      id,
+      name,
+      email,
+      phone,
+    };
+    dispatch(addContact(newContact));
+    setName("");
+    setEmail("");
+    setPhone("");
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="name">Name:</label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          value={formData.name}
-          onChange={handleInputChange}
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="phone">Phone:</label>
-        <input
-          type="text"
-          id="phone"
-          name="phone"
-          value={formData.phone}
-          onChange={handleInputChange}
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="email">Email:</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          value={formData.email}
-          onChange={handleInputChange}
-          required
-        />
-      </div>
-      <button type="submit">Add Contact</button>
-    </form>
+    <>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor="name">Name:</label>
+          <input
+            required
+            type="text"
+            id="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </div>
+        <div>
+          <label htmlFor="email">Email:</label>
+          <input
+            required
+            type="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+        <div>
+          <label htmlFor="phone">Phone:</label>
+          <input
+            required
+            type="tel"
+            id="phone"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+          />
+        </div>
+        <button type="submit">Add Contact</button>
+      </form>
+
+      {/* <ContactList /> */}
+    </>
+
+
   );
 }
 

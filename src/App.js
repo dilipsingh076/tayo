@@ -3,13 +3,19 @@ import './App.css';
 import ContactForm from './Components/ContactForm';
 import ContactList from './Components/ContactList';
 import { useSelector } from 'react-redux';
+// import 'rsuite/dist/rsuite.min.css';
+// import Sidebar from './Components/Sidebar';
+import SideNavbar from './Components/Sidebar';
+import AllRoutes from './Components/AllRoutes';
 
 function App() {
-  const contacts = useSelector(state => state.contacts);
+  const contacts = useSelector(state => state.contact);
+  console.log("contacts app",contacts)
+
   return (
     <div className="App">
-      <ContactForm/>
-      <ContactList contacts={contacts} />
+      <SideNavbar/>
+      <AllRoutes/>
     </div>
   );
 }
