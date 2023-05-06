@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import ContactForm from './Components/ContactForm';
 import ContactList from './Components/ContactList';
+import 'rsuite/dist/rsuite.min.css';
 import { useSelector } from 'react-redux';
 // import 'rsuite/dist/rsuite.min.css';
 // import Sidebar from './Components/Sidebar';

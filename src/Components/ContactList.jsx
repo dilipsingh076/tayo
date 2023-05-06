@@ -22,7 +22,7 @@ function ContactList() {
   };
 
   const handleDelete = (id) => {
-    dispatch(deleteContact(id)); // dispatch the deleteContact action with the id
+    dispatch(deleteContact(id));
     setState({});
   };
 

@@ -192,3 +192,19 @@ code {
   background-color: #4caf50;
   color: white;
 }
+
+.listitem{
+  /* border: 1px solid blue; */
+  width: 30%;
+  margin: auto;
+  height: 80px;
+  list-style: none;
+
+}
+.listitem >button {
+  margin-left: 7px;
+  cursor: pointer;
+  margin-top: 10px;
+  color: white;
+  border-radius: 5px;
+}

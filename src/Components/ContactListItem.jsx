@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {Modal} from 'rsuite'
 import EditContact from './EditContact';
 
 function ContactListItem({ contact, onDelete }) {
@@ -27,19 +28,27 @@ function ContactListItem({ contact, onDelete }) {
   };
 
   return (
-    <li>
-      <span>{contact.name}</span>
-      <button onClick={handleEditClick}>Edit</button>
-      <button onClick={handleDeleteClick}>Delete</button>
+    <li className='listitem' >
+      <span>{contact.name}</span><br/>
+      <button style={{background:"green"}}  onClick={handleEditClick}>Edit</button>
+      <button style={{background:"red"}} onClick={handleDeleteClick}>Delete</button>
       {isEditing && <EditContact contact={contact} onClose={handleEditClose} />}
-      {isDeleting && (
-        <div>
-          <h2>Delete Contact</h2>
+      <Modal open={isDeleting} onHide={handleDeleteClose}>
+        <Modal.Header>
+          <Modal.Title>Delete Contact</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
           <p>Are you sure you want to delete {contact.name}?</p>
-          <button onClick={handleDeleteConfirm}>Delete</button>
-          <button onClick={handleDeleteClose}>Cancel</button>
-        </div>
-      )}
+        </Modal.Body>
+        <Modal.Footer>
+          <button onClick={handleDeleteConfirm} appearance="primary">
+            Delete
+          </button>
+          <button onClick={handleDeleteClose} appearance="subtle">
+            Cancel
+          </button>
+        </Modal.Footer>
+      </Modal>
     </li>
   );
 }
